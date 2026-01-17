@@ -281,5 +281,31 @@ namespace Notepads.Controls.TextEditor
                 LoggingService.LogError($"[TextEditorCore.CodexZone] Error scheduling highlighting: {ex.Message}");
             }
         }
+
+        /// <summary>
+        /// Refreshes CodexZone colors when the theme changes.
+        /// </summary>
+        public void RefreshCodexZoneTheme()
+        {
+            if (!_isCodexZoneEnabled || !_loaded)
+            {
+                return;
+            }
+
+            ApplyCodexZoneSyntaxHighlighting();
+        }
+
+        /// <summary>
+        /// Clears pending operations and resets CodexZone state.
+        /// </summary>
+        private void DisposeCodexZoneResources()
+        {
+            _highlightingCts?.Cancel();
+            _highlightingCts?.Dispose();
+            _highlightingCts = null;
+            _lastHighlightedText = string.Empty;
+            _lastHighlightedTextLength = 0;
+            _isHighlightingInProgress = false;
+        }
     }
 }

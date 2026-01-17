@@ -327,7 +327,10 @@ namespace Notepads.Controls.TextEditor
 
             UpdateLineHighlighterAndIndicator();
             if (DisplayLineNumbers) ShowLineNumbers();
-            ScheduleCodexZoneRefresh(force: true);
+            if (_isCodexZoneEnabled)
+            {
+                ScheduleCodexZoneHighlighting();
+            }
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs _)

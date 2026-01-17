@@ -15,12 +15,23 @@ namespace Notepads.Views.MainPage
     public sealed partial class NotepadsMainPage
     {
         private bool _isCodexZoneEnabled = false;
+        private bool _isCodexZoneToggleUpdating;
+
+        private void Sets_OnSelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
+        {
+            UpdateCodexZoneToggleState();
+        }
 
         /// <summary>
         /// Handles the CodexZone toggle button click event
         /// </summary>
         private void CodexZoneToggleButton_Click(object sender, RoutedEventArgs e)
         {
+            if (_isCodexZoneToggleUpdating)
+            {
+                return;
+            }
+
             if (sender is ToggleButton toggleButton)
             {
                 _isCodexZoneEnabled = toggleButton.IsChecked == true;
@@ -50,6 +61,18 @@ namespace Notepads.Views.MainPage
 
                 LoggingService.LogInfo($"[NotepadsMainPage] CodexZone mode {(_isCodexZoneEnabled ? "enabled" : "disabled")}", consoleOnly: true);
             }
+        }
+
+        private void UpdateCodexZoneToggleState()
+        {
+            if (CodexZoneToggleButton == null)
+            {
+                return;
+            }
+
+            _isCodexZoneToggleUpdating = true;
+            CodexZoneToggleButton.IsChecked = _isCodexZoneEnabled;
+            _isCodexZoneToggleUpdating = false;
         }
 
         /// <summary>

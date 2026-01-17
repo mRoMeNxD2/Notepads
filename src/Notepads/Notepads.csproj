@@ -234,6 +234,8 @@
     <Compile Include="Views\MainPage\NotepadsMainPage.Theme.cs" />
     <Compile Include="Services\FileExtensionProvider.cs" />
     <Compile Include="Services\JumpListService.cs" />
+    <Compile Include="Services\CodexZoneErrorIndicator.cs" />
+    <Compile Include="Services\CodexZoneSyntaxHighlighter.cs" />
     <Compile Include="Views\MainPage\NotepadsMainPage.IO.cs" />
     <Compile Include="Views\MainPage\NotepadsMainPage.StatusBar.cs" />
     <Compile Include="Views\MainPage\NotepadsMainPage.ViewModes.cs" />
