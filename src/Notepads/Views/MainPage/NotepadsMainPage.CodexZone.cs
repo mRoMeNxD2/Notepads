@@ -5,49 +5,62 @@
 
 namespace Notepads.Views.MainPage
 {
-    using Notepads.Controls.TextEditor;
+    using Notepads.Services;
     using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Controls.Primitives;
 
+    /// <summary>
+    /// Partial class for NotepadsMainPage that handles CodexZone functionality
+    /// </summary>
     public sealed partial class NotepadsMainPage
     {
-        private bool _isCodexZoneToggleUpdating;
+        private bool _isCodexZoneEnabled = false;
 
-        private void Sets_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// Handles the CodexZone toggle button click event
+        /// </summary>
+        private void CodexZoneToggleButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateCodexZoneToggleState();
+            if (sender is ToggleButton toggleButton)
+            {
+                _isCodexZoneEnabled = toggleButton.IsChecked == true;
+                
+                // Apply CodexZone mode to all open editors
+                var allEditors = NotepadsCore.GetAllTextEditors();
+                foreach (var editor in allEditors)
+                {
+                    editor.IsCodexZoneEnabled = _isCodexZoneEnabled;
+                }
+
+                // Show notification
+                if (_isCodexZoneEnabled)
+                {
+                    NotificationCenter.Instance.PostNotification(
+                        _resourceLoader.GetString("CodexZone_Enabled") ?? "Codex Zone enabled - Code highlighting active", 
+                        1500);
+                    AnalyticsService.TrackEvent("CodexZone_Enabled");
+                }
+                else
+                {
+                    NotificationCenter.Instance.PostNotification(
+                        _resourceLoader.GetString("CodexZone_Disabled") ?? "Codex Zone disabled", 
+                        1500);
+                    AnalyticsService.TrackEvent("CodexZone_Disabled");
+                }
+
+                LoggingService.LogInfo($"[NotepadsMainPage] CodexZone mode {(_isCodexZoneEnabled ? "enabled" : "disabled")}", consoleOnly: true);
+            }
         }
 
-        private void CodexZoneToggle_OnToggled(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Applies CodexZone mode to a newly created or loaded editor
+        /// </summary>
+        private void ApplyCodexZoneModeToEditor(Controls.TextEditor.ITextEditor textEditor)
         {
-            if (_isCodexZoneToggleUpdating)
+            if (textEditor != null)
             {
-                return;
+                textEditor.IsCodexZoneEnabled = _isCodexZoneEnabled;
             }
-
-            if (!(sender is ToggleButton toggleButton))
-            {
-                return;
-            }
-
-            if (NotepadsCore.GetSelectedTextEditor() is ITextEditor textEditor)
-            {
-                textEditor.IsCodexZoneEnabled = toggleButton.IsChecked == true;
-            }
-        }
-
-        private void UpdateCodexZoneToggleState()
-        {
-            if (CodexZoneToggle == null)
-            {
-                return;
-            }
-
-            _isCodexZoneToggleUpdating = true;
-            var textEditor = NotepadsCore.GetSelectedTextEditor();
-            CodexZoneToggle.IsChecked = textEditor?.IsCodexZoneEnabled ?? false;
-            _isCodexZoneToggleUpdating = false;
         }
     }
 }

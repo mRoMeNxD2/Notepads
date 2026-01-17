@@ -190,15 +190,8 @@ namespace Notepads.Controls.TextEditor
 
         public bool IsCodexZoneEnabled
         {
-            get => _isCodexZoneEnabled;
-            set
-            {
-                if (_isCodexZoneEnabled != value)
-                {
-                    _isCodexZoneEnabled = value;
-                    TextEditorCore.IsCodexZoneEnabled = value;
-                }
-            }
+            get => TextEditorCore.IsCodexZoneEnabled;
+            set => TextEditorCore.IsCodexZoneEnabled = value;
         }
 
         public TextEditor()

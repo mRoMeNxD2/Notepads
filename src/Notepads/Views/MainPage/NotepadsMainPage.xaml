@@ -209,21 +209,23 @@
                         </controls:SetsView.SetsStartHeader>
 
                         <controls:SetsView.SetsActionHeader>
-                            <Button x:Name="NewSetButton"
-                                    Grid.Column="0"
-                                    IsTabStop="False"
-                                    Width="42"
-                                    Height="{StaticResource SetsViewItemHeaderMinHeight}"
-                                    Margin="-1,0,0,0"
-                                    BorderThickness="0"
-                                    Background="Transparent"
-                                    Style="{ThemeResource ButtonRevealStyle}">
-                                    <Viewbox MaxWidth="14"
-                                        MaxHeight="14">
-                                        <FontIcon FontFamily="Segoe MDL2 Assets"
-                                            Glyph="&#xE710;" />
-                                    </Viewbox>
-                            </Button>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="NewSetButton"
+                                        Grid.Column="0"
+                                        IsTabStop="False"
+                                        Width="42"
+                                        Height="{StaticResource SetsViewItemHeaderMinHeight}"
+                                        Margin="-1,0,0,0"
+                                        BorderThickness="0"
+                                        Background="Transparent"
+                                        Style="{ThemeResource ButtonRevealStyle}">
+                                        <Viewbox MaxWidth="14"
+                                            MaxHeight="14">
+                                            <FontIcon FontFamily="Segoe MDL2 Assets"
+                                                Glyph="&#xE710;" />
+                                        </Viewbox>
+                                </Button>
+                            </StackPanel>
                         </controls:SetsView.SetsActionHeader>
 
                         <controls:SetsView.SetsPaddingHeader>
@@ -231,26 +233,29 @@
                         </controls:SetsView.SetsPaddingHeader>
 
                         <controls:SetsView.SetsEndHeader>
-                            <Grid Background="Transparent" HorizontalAlignment="Right" Height="32">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <ToggleButton x:Name="CodexZoneToggle"
-                                              Grid.Column="0"
-                                              Content="Codex Zone"
-                                              VerticalAlignment="Center"
-                                              Margin="0,0,8,0"
-                                              Padding="12,4"
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="32">
+                                <!-- Codex Zone Toggle Button -->
+                                <ToggleButton x:Name="CodexZoneToggleButton"
                                               IsTabStop="False"
-                                              Toggled="CodexZoneToggle_OnToggled"/>
-                                <Grid x:Name="TitleBarReservedArea"
-                                      Grid.Column="1"
-                                      Background="Transparent"
-                                      HorizontalAlignment="Center"
-                                      Width="180"
-                                      Height="32"/>
-                            </Grid>
+                                              Height="{StaticResource SetsViewItemHeaderMinHeight}"
+                                              Padding="8,0,8,0"
+                                              Margin="0,0,4,0"
+                                              BorderThickness="0"
+                                              Background="Transparent"
+                                              Click="CodexZoneToggleButton_Click"
+                                              ToolTipService.ToolTip="Codex Zone - Toggle code highlighting mode">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <FontIcon FontFamily="Segoe MDL2 Assets"
+                                                  Glyph="&#xE943;"
+                                                  FontSize="12"
+                                                  Margin="0,0,4,0"/>
+                                        <TextBlock Text="Codex Zone" 
+                                                   FontSize="11"
+                                                   VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                                <Grid x:Name="TitleBarReservedArea" Background="Transparent" HorizontalAlignment="Center" Width="180" Height="32"/>
+                            </StackPanel>
                         </controls:SetsView.SetsEndHeader>
 
                     </controls:SetsView>

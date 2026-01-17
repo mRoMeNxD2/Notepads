@@ -387,7 +387,12 @@ namespace Notepads.Controls.TextEditor
         private void OnTextChanged(object sender, RoutedEventArgs _)
         {
             UpdateLineNumbersRendering();
-            ScheduleCodexZoneRefresh();
+            
+            // Schedule CodexZone syntax highlighting if enabled
+            if (_isCodexZoneEnabled)
+            {
+                ScheduleCodexZoneHighlighting();
+            }
         }
 
         private void OnSelectionChanging(RichEditBox sender, RichEditBoxSelectionChangingEventArgs args)

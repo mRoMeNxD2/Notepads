@@ -487,6 +487,9 @@ namespace Notepads.Views.MainPage
 
         private void OnTextEditorLoaded(object sender, ITextEditor textEditor)
         {
+            // Apply CodexZone mode if enabled
+            ApplyCodexZoneModeToEditor(textEditor);
+            
             if (NotepadsCore.GetSelectedTextEditor() == textEditor)
             {
                 SetupStatusBar(textEditor);
