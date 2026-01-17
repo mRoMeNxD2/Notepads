@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -171,6 +171,7 @@
       <DependentUpon>PrintPageFormat.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TextEditor\TextEditorCore.JoinText.cs" />
+    <Compile Include="Controls\TextEditor\TextEditorCore.CodexZone.cs" />
     <Compile Include="Controls\TextEditor\TextEditorCore.ExternalEventListener.cs" />
     <Compile Include="Controls\TextEditor\TextEditorCore.LineHighlighter.cs" />
     <Compile Include="Controls\TextEditor\TextEditorCore.LineNumbers.cs" />
@@ -227,11 +228,14 @@
     <Compile Include="Controls\DiffViewer\ISideBySideDiffViewer.cs" />
     <Compile Include="Controls\DiffViewer\ScrollViewerSynchronizer.cs" />
     <Compile Include="Controls\DiffViewer\RichTextBlockDiffRenderer.cs" />
+    <Compile Include="Views\MainPage\NotepadsMainPage.CodexZone.cs" />
     <Compile Include="Views\MainPage\NotepadsMainPage.MainMenu.cs" />
     <Compile Include="Views\MainPage\NotepadsMainPage.Notification.cs" />
     <Compile Include="Views\MainPage\NotepadsMainPage.Theme.cs" />
     <Compile Include="Services\FileExtensionProvider.cs" />
     <Compile Include="Services\JumpListService.cs" />
+    <Compile Include="Services\CodexZoneErrorIndicator.cs" />
+    <Compile Include="Services\CodexZoneSyntaxHighlighter.cs" />
     <Compile Include="Views\MainPage\NotepadsMainPage.IO.cs" />
     <Compile Include="Views\MainPage\NotepadsMainPage.StatusBar.cs" />
     <Compile Include="Views\MainPage\NotepadsMainPage.ViewModes.cs" />

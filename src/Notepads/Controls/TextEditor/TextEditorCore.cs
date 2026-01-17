@@ -232,6 +232,7 @@ namespace Notepads.Controls.TextEditor
             TextWrappingChanged -= OnTextWrappingChanged;
             SizeChanged -= OnSizeChanged;
             FontSizeChanged -= OnFontSizeChanged;
+            DisposeCodexZoneResources();
 
             UnhookExternalEvents();
 
@@ -326,6 +327,10 @@ namespace Notepads.Controls.TextEditor
 
             UpdateLineHighlighterAndIndicator();
             if (DisplayLineNumbers) ShowLineNumbers();
+            if (_isCodexZoneEnabled)
+            {
+                ScheduleCodexZoneHighlighting();
+            }
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs _)

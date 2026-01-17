@@ -143,6 +143,8 @@ namespace Notepads.Controls.TextEditor
 
         private bool _isContentPreviewPanelOpened;
 
+        private bool _isCodexZoneEnabled;
+
         private readonly ResourceLoader _resourceLoader = ResourceLoader.GetForCurrentView();
 
         private CancellationTokenSource _fileStatusCheckerCancellationTokenSource;
@@ -294,6 +296,8 @@ namespace Notepads.Controls.TextEditor
                         await Dispatcher.CallOnUIThreadAsync(() => { SideBySideDiffViewer.Focus(); });
                     });
                 }
+
+                TextEditorCore.RefreshCodexZoneTheme();
             });
         }
 
@@ -340,7 +344,8 @@ namespace Notepads.Controls.TextEditor
                 ScrollViewerVerticalOffset = verticalOffset,
                 FontZoomFactor = TextEditorCore.GetFontZoomFactor() / 100,
                 IsContentPreviewPanelOpened = _isContentPreviewPanelOpened,
-                IsInDiffPreviewMode = (Mode == TextEditorMode.DiffPreview)
+                IsInDiffPreviewMode = (Mode == TextEditorMode.DiffPreview),
+                IsCodexZoneEnabled = IsCodexZoneEnabled
             };
 
             if (RequestedEncoding != null)
@@ -534,6 +539,7 @@ namespace Notepads.Controls.TextEditor
             TextEditorCore.SetTextSelectionPosition(metadata.SelectionStartPosition, metadata.SelectionEndPosition);
             TextEditorCore.SetScrollViewerInitPosition(metadata.ScrollViewerHorizontalOffset, metadata.ScrollViewerVerticalOffset);
             TextEditorCore.ClearUndoQueue();
+            IsCodexZoneEnabled = metadata.IsCodexZoneEnabled;
         }
 
         public void RevertAllChanges()

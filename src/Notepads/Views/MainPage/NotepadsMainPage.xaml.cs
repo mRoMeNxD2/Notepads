@@ -129,6 +129,7 @@ namespace Notepads.Views.MainPage
             RootSplitView.PaneOpening += delegate { SettingsFrame.Navigate(typeof(SettingsPage), null, new SuppressNavigationTransitionInfo()); };
             RootSplitView.PaneClosed += delegate { NotepadsCore.FocusOnSelectedTextEditor(); };
             NewSetButton.Click += delegate { NotepadsCore.OpenNewTextEditor(_defaultNewFileName); };
+            Sets.SelectionChanged += Sets_OnSelectionChanged;
         }
 
         private void InitializeKeyboardShortcuts()
@@ -492,6 +493,7 @@ namespace Notepads.Views.MainPage
             if (NotepadsCore.GetSelectedTextEditor() == textEditor)
             {
                 SetupStatusBar(textEditor);
+                UpdateCodexZoneToggleState();
                 NotepadsCore.FocusOnSelectedTextEditor();
             }
         }
