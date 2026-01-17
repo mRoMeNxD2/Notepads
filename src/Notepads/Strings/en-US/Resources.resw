@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -708,5 +708,17 @@
   <data name="SessionCorruptionErrorDialog_Title" xml:space="preserve">
     <value>Warning</value>
     <comment>SessionCorruptionErrorDialog: "Title" display text.</comment>
+  </data>
+  <data name="CodexZone_Enabled" xml:space="preserve">
+    <value>Codex Zone enabled - Code highlighting active</value>
+    <comment>CodexZone: Notification message when code mode is enabled.</comment>
+  </data>
+  <data name="CodexZone_Disabled" xml:space="preserve">
+    <value>Codex Zone disabled</value>
+    <comment>CodexZone: Notification message when code mode is disabled.</comment>
+  </data>
+  <data name="CodexZone_ToggleButton_ToolTip" xml:space="preserve">
+    <value>Codex Zone - Toggle code highlighting mode</value>
+    <comment>CodexZone: Toggle button tooltip text.</comment>
   </data>
 </root>

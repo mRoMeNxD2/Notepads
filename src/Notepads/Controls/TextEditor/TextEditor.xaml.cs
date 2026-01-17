@@ -1,4 +1,4 @@
-﻿namespace Notepads.Controls.TextEditor
+namespace Notepads.Controls.TextEditor
 {
     using System;
     using System.Collections.Generic;
@@ -184,6 +184,12 @@
         {
             get => TextEditorCore.DisplayLineHighlighter;
             set => TextEditorCore.DisplayLineHighlighter = value;
+        }
+
+        public bool IsCodexZoneEnabled
+        {
+            get => TextEditorCore.IsCodexZoneEnabled;
+            set => TextEditorCore.IsCodexZoneEnabled = value;
         }
 
         public TextEditor()
