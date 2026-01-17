@@ -1,4 +1,4 @@
-﻿namespace Notepads.Controls.TextEditor
+namespace Notepads.Controls.TextEditor
 {
     using System;
     using System.Collections.Generic;
@@ -143,6 +143,8 @@
 
         private bool _isContentPreviewPanelOpened;
 
+        private bool _isCodexZoneEnabled;
+
         private readonly ResourceLoader _resourceLoader = ResourceLoader.GetForCurrentView();
 
         private CancellationTokenSource _fileStatusCheckerCancellationTokenSource;
@@ -184,6 +186,19 @@
         {
             get => TextEditorCore.DisplayLineHighlighter;
             set => TextEditorCore.DisplayLineHighlighter = value;
+        }
+
+        public bool IsCodexZoneEnabled
+        {
+            get => _isCodexZoneEnabled;
+            set
+            {
+                if (_isCodexZoneEnabled != value)
+                {
+                    _isCodexZoneEnabled = value;
+                    TextEditorCore.IsCodexZoneEnabled = value;
+                }
+            }
         }
 
         public TextEditor()
@@ -288,6 +303,8 @@
                         await Dispatcher.CallOnUIThreadAsync(() => { SideBySideDiffViewer.Focus(); });
                     });
                 }
+
+                TextEditorCore.RefreshCodexZoneTheme();
             });
         }
 
@@ -334,7 +351,8 @@
                 ScrollViewerVerticalOffset = verticalOffset,
                 FontZoomFactor = TextEditorCore.GetFontZoomFactor() / 100,
                 IsContentPreviewPanelOpened = _isContentPreviewPanelOpened,
-                IsInDiffPreviewMode = (Mode == TextEditorMode.DiffPreview)
+                IsInDiffPreviewMode = (Mode == TextEditorMode.DiffPreview),
+                IsCodexZoneEnabled = IsCodexZoneEnabled
             };
 
             if (RequestedEncoding != null)
@@ -528,6 +546,7 @@
             TextEditorCore.SetTextSelectionPosition(metadata.SelectionStartPosition, metadata.SelectionEndPosition);
             TextEditorCore.SetScrollViewerInitPosition(metadata.ScrollViewerHorizontalOffset, metadata.ScrollViewerVerticalOffset);
             TextEditorCore.ClearUndoQueue();
+            IsCodexZoneEnabled = metadata.IsCodexZoneEnabled;
         }
 
         public void RevertAllChanges()

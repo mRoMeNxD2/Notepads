@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="Notepads.Views.MainPage.NotepadsMainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -231,7 +231,26 @@
                         </controls:SetsView.SetsPaddingHeader>
 
                         <controls:SetsView.SetsEndHeader>
-                            <Grid x:Name="TitleBarReservedArea" Background="Transparent" HorizontalAlignment="Center" Width="180" Height="32"/>
+                            <Grid Background="Transparent" HorizontalAlignment="Right" Height="32">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton x:Name="CodexZoneToggle"
+                                              Grid.Column="0"
+                                              Content="Codex Zone"
+                                              VerticalAlignment="Center"
+                                              Margin="0,0,8,0"
+                                              Padding="12,4"
+                                              IsTabStop="False"
+                                              Toggled="CodexZoneToggle_OnToggled"/>
+                                <Grid x:Name="TitleBarReservedArea"
+                                      Grid.Column="1"
+                                      Background="Transparent"
+                                      HorizontalAlignment="Center"
+                                      Width="180"
+                                      Height="32"/>
+                            </Grid>
                         </controls:SetsView.SetsEndHeader>
 
                     </controls:SetsView>

@@ -1,4 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------
 //  Copyright (c) 2019-2024, Jiaqi (0x7c13) Liu. All rights reserved.
 //  See LICENSE file in the project root for license information.
 // ---------------------------------------------------------------------------------------------
@@ -232,6 +232,7 @@ namespace Notepads.Controls.TextEditor
             TextWrappingChanged -= OnTextWrappingChanged;
             SizeChanged -= OnSizeChanged;
             FontSizeChanged -= OnFontSizeChanged;
+            DisposeCodexZoneResources();
 
             UnhookExternalEvents();
 
@@ -326,6 +327,7 @@ namespace Notepads.Controls.TextEditor
 
             UpdateLineHighlighterAndIndicator();
             if (DisplayLineNumbers) ShowLineNumbers();
+            ScheduleCodexZoneRefresh(force: true);
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs _)
@@ -385,6 +387,7 @@ namespace Notepads.Controls.TextEditor
         private void OnTextChanged(object sender, RoutedEventArgs _)
         {
             UpdateLineNumbersRendering();
+            ScheduleCodexZoneRefresh();
         }
 
         private void OnSelectionChanging(RichEditBox sender, RichEditBoxSelectionChangingEventArgs args)

@@ -1,4 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------
 //  Copyright (c) 2019-2024, Jiaqi (0x7c13) Liu. All rights reserved.
 //  See LICENSE file in the project root for license information.
 // ---------------------------------------------------------------------------------------------
@@ -129,6 +129,7 @@ namespace Notepads.Views.MainPage
             RootSplitView.PaneOpening += delegate { SettingsFrame.Navigate(typeof(SettingsPage), null, new SuppressNavigationTransitionInfo()); };
             RootSplitView.PaneClosed += delegate { NotepadsCore.FocusOnSelectedTextEditor(); };
             NewSetButton.Click += delegate { NotepadsCore.OpenNewTextEditor(_defaultNewFileName); };
+            Sets.SelectionChanged += Sets_OnSelectionChanged;
         }
 
         private void InitializeKeyboardShortcuts()
@@ -489,6 +490,7 @@ namespace Notepads.Views.MainPage
             if (NotepadsCore.GetSelectedTextEditor() == textEditor)
             {
                 SetupStatusBar(textEditor);
+                UpdateCodexZoneToggleState();
                 NotepadsCore.FocusOnSelectedTextEditor();
             }
         }
